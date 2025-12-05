@@ -17,7 +17,5 @@ jobs:
     steps:
 
     - uses: actions/checkout@v4
-    - name: Display Available Versions
-      run: rustc --print target-list
     - name: Build
-      run: cargo build --verbose --target=x86_64-unknown-uefi-unknown
+      run: cargo build --verbose --target=x86_64-unknown-uefi
