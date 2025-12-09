@@ -62,8 +62,8 @@ impl Expressions {
             chars::EQUALS => {-9},
             _ => todo!(),
         };
-        self.array[self.index as usize] = matched_char;
         self.index = self.index + 1;
+        self.array[self.index as usize] = matched_char;
         matched_char
 
     }
@@ -160,6 +160,7 @@ fn calc(inputted_command: [Char16; 1024]) -> [i32; 1024] {
             } else {
                 if is_number.start == false {
                     is_number.index = is_number.index + 1;
+                    expressions.index = expressions.index + 1;
                     expressions.array[expressions.index as usize] = is_number.index as i32;
                 } else {
                     is_number.start = false;
@@ -173,7 +174,8 @@ fn calc(inputted_command: [Char16; 1024]) -> [i32; 1024] {
         }
 
         //iosys::out(iosys::SimpleIO::ArrayInt(is_number.array), empty::UNSIGNED_SIZE);
-        iosys::ArrayExpOut(iosys::SimpleIO::ArrayExp(expressions.array), iosys::SimpleIO::ArrayInt(is_number.array));
+        //iosys::ArrayExpOut(iosys::SimpleIO::ArrayExp(expressions.array), iosys::SimpleIO::ArrayInt(is_number.array));
+        iosys::out(iosys::SimpleIO::ArrayExp(expressions.array), empty::UNSIGNED_SIZE);
         iosys::out(iosys::SimpleIO::Text("\t"), empty::UNSIGNED_SIZE);
         iosys::out(iosys::SimpleIO::Text("\n"), empty::UNSIGNED_SIZE);
     } 
@@ -204,8 +206,8 @@ fn main() -> Status {
 
                     // iosys::out(iosys::SimpleIO::ArrayChar((total_input)), (position_counter) as usize); 
                     // iosys::out(iosys::SimpleIO::Text("\nSHELL $> "), empty::UNSIGNED_SIZE);
-
-                    iosys::out(iosys::SimpleIO::ArrayInt(calc(total_input)), empty::UNSIGNED_SIZE);
+                    calc(total_input);
+                    // iosys::out(iosys::SimpleIO::ArrayInt(calc(total_input)), empty::UNSIGNED_SIZE);
                     iosys::out(iosys::SimpleIO::Text("\nSHELL $> "), empty::UNSIGNED_SIZE);
 
                     position_counter = 0;

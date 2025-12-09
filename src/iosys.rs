@@ -178,17 +178,17 @@ pub fn ArrayExpOut(x: SimpleIO, y: SimpleIO) {
             SimpleIO::ArrayExp(xx) => {
                 match y {
                     SimpleIO::ArrayInt(yy) => {
+                        let expressionslist: [char; 10] = [' ','+','-','/','*','(',')','^','$','='];
                         for n in 0..1024 {
-                        let b: &i32 = &xx[n];
-                        if b == &-10  {
-                            write!(stdout, "Breakpoint at {}", n).unwrap();
-                            break;
-                        } else if b >= &0 {
-                            write!(stdout, "{}", yy[*b as usize]).unwrap();
-                        }
-                        write!(stdout, "{} ", b).unwrap();
-                        // Print numbers as decimal values
-                        }
+                            let b: &i32 = &xx[n];
+                            if b == &-10  {
+                                break;
+                            } else if b >= &0 {
+                                write!(stdout, "{}", yy[*b as usize]).unwrap();
+                            }else if b < &0 {
+                                write!(stdout, "{}", expressionslist[(b * -1) as usize]).unwrap();
+                            }
+                    }
                     },
                     _ => todo!(),
                 }
@@ -198,3 +198,4 @@ pub fn ArrayExpOut(x: SimpleIO, y: SimpleIO) {
             
             });
     }
+
